@@ -122,6 +122,21 @@ function createAlbumsList(albums) {
     return ulEl;
 }
 
+function onAlbumsReceived() {
+    albumsDivEl.style.display = 'block';
+    postsDivEl.style.display = 'none';
+
+    const text = this.responseText;
+    const albums = JSON.parse(text);
+
+    const albumDivEl = document.getElementById('albums-content');
+
+    while (albumDivEl.firstChild) {
+        albumDivEl.removeChild(albumDivEl.firstChild);
+    }
+    albumDivEl.appendChild(createAlbumsList(albums));
+}
+
 function createCommentsList(comments) {
     const ulEl = document.createElement('ul');
     ulEl.classList.add('comments');
