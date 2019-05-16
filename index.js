@@ -103,6 +103,33 @@ function createAlbumsList(albums) {
     return ulEl;
 }
 
+function createCommentsForUser(comments) {
+    const ulEl = document.createElement('ul');
+    ulEl.classList.add('comments');
+
+    const h3El = document.createElement('h3');
+    h3El.textContent = 'Comments';
+    ulCommentEl.appendChild(h3El);
+
+    for (let i = 0; i < comments.length; i++) {
+        const comment = comments[i];
+        ulEl.setAttribute('id', comment.postId);
+
+        const strongEl = document.createElement('strong');
+        strongEl.textContent = comment.name;
+
+        const pEl = document.createElement('p');
+        pEl.appendChild(strongEl);
+        pEl.appendChild(document.createTextNode(`: ${comment.body}`));
+
+        const liEl = document.createElement('li');
+        liEl.appendChild(pEl);
+
+        ulEl.appendChild(liEl);
+    }
+    return ulEl;
+}
+
 function createUsersTableHeader() {
     const idTdEl = document.createElement('td');
     idTdEl.textContent = 'Id';
