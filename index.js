@@ -51,6 +51,30 @@ function onLoadPosts() {
     xhr.send();
 }
 
+function createPhotosList(photos) {
+    const ulEl = document.createElement('ul');
+    ulEl.classList.add('photos');
+
+    for (let i = 0; i < photos.length; i++) {
+        const photo = photos[i];
+
+        ulEl.setAttribute('id', photo.albumId);
+
+        const aEl = document.createElement('a');
+        aEl.setAttribute('href', photo.url);
+
+        const imgEl = document.createElement('img');
+        imgEl.setAttribute('src', photo.thumbnailUrl);
+        aEl.appendChild(imgEl);
+
+        const liEl = document.createElement('li');
+        liEl.appendChild(aEl);
+
+        ulEl.appendChild(liEl);
+    }
+    return ulEl;
+}
+
 function createUsersTableHeader() {
     const idTdEl = document.createElement('td');
     idTdEl.textContent = 'Id';
