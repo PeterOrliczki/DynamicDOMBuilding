@@ -75,6 +75,34 @@ function createPhotosList(photos) {
     return ulEl;
 }
 
+function createAlbumsList(albums) {
+    const ulEl = document.createElement('ul');
+
+    const h2El = document.createElement('h2');
+    h2El.textContent = 'Albums';
+    ulEl.appendChild(h2El);
+
+    for (let i = 0; i < albums.length; i++) {
+        const album = albums[i];
+
+        const strongEl = document.createElement('strong');
+        strongEl.textContent = album.title;
+
+        const pEl = document.createElement('p');
+        pEl.appendChild(strongEl);
+
+        const albumId = album.id;
+        pEl.setAttribute('id', albumId);
+        pEl.addEventListener('click', onLoadPhotos);
+
+        const liEl = document.createElement('li');
+        liEl.appendChild(pEl);
+
+        ulEl.appendChild(liEl);
+    }
+    return ulEl;
+}
+
 function createUsersTableHeader() {
     const idTdEl = document.createElement('td');
     idTdEl.textContent = 'Id';
