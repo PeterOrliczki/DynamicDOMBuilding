@@ -94,6 +94,16 @@ function onPhotosReceived() {
     }
 }
 
+function onLoadPhotos() {
+    const albumEl = this;
+    const albumId = albumEl.getAttribute('id');
+
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener('load', onPhotosReceived);
+    xhr.open('GET', BASE_URL + '/photos?albumId=' + albumId);
+    xhr.send();
+}
+
 function createAlbumsList(albums) {
     const ulEl = document.createElement('ul');
 
