@@ -147,6 +147,16 @@ function onAlbumsReceived() {
     albumDivEl.appendChild(createAlbumsList(albums));
 }
 
+function onLoadAlbums() {
+    const albumEl = this;
+    const userId = albumEl.getAttribute('album-user-id');
+
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener('load', onAlbumsReceived);
+    xhr.open('GET', BASE_URL + '/albums?userId=' + userId);
+    xhr.send();
+}
+
 function createCommentsList(comments) {
     const ulEl = document.createElement('ul');
     ulEl.classList.add('comments');
@@ -190,6 +200,16 @@ function onCommentsReceived() {
     if (postDivEl.childNodes.length <= 1) {
         postDivEl.appendChild(createCommentsList(comments));
     }
+}
+
+function onLoadComments() {
+    const postEl = this;
+    const postId = postEl.getAttribute('post-id');
+
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener('load', onCommentsReceived);
+    xhr.open('GET', BASE_URL + '/comments?postId=' + postId);
+    xhr.send();
 }
 
 function createUsersTableHeader() {
