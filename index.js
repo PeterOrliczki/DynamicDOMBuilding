@@ -170,7 +170,7 @@ function createCommentsList(comments) {
 
     const h3El = document.createElement('h3');
     h3El.textContent = 'Comments';
-    ulCommentEl.appendChild(h3El);
+    ulEl.appendChild(h3El);
 
     for (let i = 0; i < comments.length; i++) {
         const comment = comments[i];
@@ -246,13 +246,14 @@ function createUsersTableBody(users) {
     for (let i = 0; i < users.length; i++) {
         const user = users[i];
 
-        // creating id cell
         const idTdEl = document.createElement('td');
         idTdEl.textContent = user.id;
 
-        // creating name cell
         const dataUserIdAttr = document.createAttribute('data-user-id');
         dataUserIdAttr.value = user.id;
+
+        const albumUserIdAttr = document.createAttribute('album-user-id');
+        albumUserIdAttr.value = user.id;
 
         const buttonNameEl = document.createElement('button');
         buttonNameEl.textContent = user.name;
