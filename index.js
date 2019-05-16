@@ -75,6 +75,25 @@ function createPhotosList(photos) {
     return ulEl;
 }
 
+function onPhotosReceived() {
+    const text = this.responseText;
+    const photos = JSON.parse(text);
+    const albumId = photos[0].albumId;
+
+    const photoList = document.getElementsByClassName('photos');
+    for (let i = 0; i < photoList.length; i++) {
+        const photo = photoList[i];
+        if (photo.getAttribute('id') !== albumId) {
+            photo.remove();
+        }
+    }
+
+    const divClickedAlbum = document.getElementById(albumId);
+    if (divClickedAlbum.childNodes.length <= 1) {
+        divClickedAlbum.appendChild(createPhotosList(photos));
+    }
+}
+
 function createAlbumsList(albums) {
     const ulEl = document.createElement('ul');
 
@@ -103,7 +122,7 @@ function createAlbumsList(albums) {
     return ulEl;
 }
 
-function createCommentsForUser(comments) {
+function createCommentsList(comments) {
     const ulEl = document.createElement('ul');
     ulEl.classList.add('comments');
 
