@@ -164,6 +164,24 @@ function createCommentsList(comments) {
     return ulEl;
 }
 
+function onCommentsReceived() {
+    const text = this.responseText;
+    const comments = JSON.parse(text);
+    const postId = comments[0].postId;
+    const idList = document.getElementsByClassName('comments');
+
+    for (let i = 0; i < idList.length; i++) {
+        const comment = idList[i];
+        if (comment.getAttribute('id') !== postId) {
+            comment.remove();
+        }
+    }
+    const postDivEl = document.getElementById(postId);
+    if (postDivEl.childNodes.length <= 1) {
+        postDivEl.appendChild(createCommentsList(comments));
+    }
+}
+
 function createUsersTableHeader() {
     const idTdEl = document.createElement('td');
     idTdEl.textContent = 'Id';
